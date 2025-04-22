@@ -67,7 +67,7 @@ const AudioPlayer: FC<AudioPlayerProps> = ({ userInteracted }) => {
         </button>
       </div>
       <audio ref={audioRef} loop>
-        <source src="/music.mp3" type="audio/mp3" />
+        <source src="/music2.mp3" type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
     </div>

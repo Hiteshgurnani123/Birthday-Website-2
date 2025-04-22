@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SparkleEffect from '../components/SparkleEffect';
 import AudioPlayer from '../components/AudioPlayer';
 import CakeCuttingAnimation from '../components/CakeCuttingAnimation';
@@ -6,6 +6,16 @@ import CakeCuttingAnimation from '../components/CakeCuttingAnimation';
 export default function CakeCuttingPage() {
   const [userInteracted, setUserInteracted] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
+  
+  // Set user interaction to true automatically when page loads
+  useEffect(() => {
+    // Small delay to ensure component is fully mounted
+    const timer = setTimeout(() => {
+      setUserInteracted(true);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
   
   // Handle first user interaction for audio
   const handleInteraction = () => {
