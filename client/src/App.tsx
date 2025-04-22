@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import { Route, Switch, useLocation } from "wouter";
 import GiftCard from "./components/GiftCard";
 import Modal from "./components/Modal";
 import AudioPlayer from "./components/AudioPlayer";
 import SparkleEffect from "./components/SparkleEffect";
+import CakeCuttingPage from "./pages/cake-cutting";
+import NotFound from "./pages/not-found";
 
 // Define the gift options
 const giftOptions = [
@@ -56,10 +59,11 @@ const giftOptions = [
   }
 ];
 
-function App() {
+function HomePage() {
   const [showModal, setShowModal] = useState(false);
   const [selectedGift, setSelectedGift] = useState<number | null>(null);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     const handleFirstInteraction = () => {
@@ -81,6 +85,11 @@ function App() {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    
+    // After a short delay, navigate to the cake cutting page
+    setTimeout(() => {
+      navigate("/cake-cutting");
+    }, 1000);
   };
 
   return (
@@ -138,6 +147,16 @@ function App() {
         onClose={handleCloseModal}
       />
     </>
+  );
+}
+
+function App() {
+  return (
+    <Switch>
+      <Route path="/" component={HomePage} />
+      <Route path="/cake-cutting" component={CakeCuttingPage} />
+      <Route component={NotFound} />
+    </Switch>
   );
 }
 

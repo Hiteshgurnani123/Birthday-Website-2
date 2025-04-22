@@ -7,10 +7,18 @@ interface ModalProps {
 
 const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [buttonText, setButtonText] = useState("Continue the magic");
   
   useEffect(() => {
     if (isOpen) {
       setIsAnimating(true);
+      
+      // Change button text after a delay
+      const buttonTimer = setTimeout(() => {
+        setButtonText("Proceed to Cake Cutting! 🎂");
+      }, 3000);
+      
+      return () => clearTimeout(buttonTimer);
     }
   }, [isOpen]);
   
@@ -48,7 +56,7 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
             className="bg-[var(--pastel-pink)] bg-opacity-70 hover:bg-opacity-90 text-white font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105"
             onClick={handleClose}
           >
-            Continue the magic
+            {buttonText}
           </button>
         </div>
       </div>
