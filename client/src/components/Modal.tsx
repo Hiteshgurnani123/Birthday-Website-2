@@ -45,7 +45,7 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
             This special moment has been captured in your heart.
           </p>
           <button 
-            className="bg-[var(--pastel-purple)] bg-opacity-70 hover:bg-opacity-90 text-white font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105"
+            className="bg-[var(--pastel-pink)] bg-opacity-70 hover:bg-opacity-90 text-white font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105"
             onClick={handleClose}
           >
             Continue the magic

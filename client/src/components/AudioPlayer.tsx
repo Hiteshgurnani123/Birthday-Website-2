@@ -5,11 +5,28 @@ interface AudioPlayerProps {
 }
 
 const AudioPlayer: FC<AudioPlayerProps> = ({ userInteracted }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true); // Default to true
   const audioRef = useRef<HTMLAudioElement>(null);
   
   useEffect(() => {
-    if (userInteracted && audioRef.current) {
+    // Try to play automatically when component mounts
+    const playAudio = async () => {
+      if (audioRef.current) {
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        } catch (error) {
+          console.error("Autoplay failed (browser policy):", error);
+          // Will try again after user interaction
+        }
+      }
+    };
+    
+    playAudio();
+  }, []);
+  
+  useEffect(() => {
+    if (userInteracted && audioRef.current && !isPlaying) {
       audioRef.current.play()
         .then(() => {
           setIsPlaying(true);
@@ -18,7 +35,7 @@ const AudioPlayer: FC<AudioPlayerProps> = ({ userInteracted }) => {
           console.error("Audio play failed:", error);
         });
     }
-  }, [userInteracted]);
+  }, [userInteracted, isPlaying]);
   
   const toggleAudio = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -46,7 +63,7 @@ const AudioPlayer: FC<AudioPlayerProps> = ({ userInteracted }) => {
           className="text-[var(--ghibli-dark)] hover:text-[var(--pastel-pink)] transition-colors duration-300"
           onClick={toggleAudio}
         >
-          <i className={`fas fa-${isPlaying ? 'music' : 'volume-mute'} text-2xl`}></i>
+          <i className={`fas fa-${isPlaying ? 'volume-up' : 'volume-mute'} text-2xl`}></i>
         </button>
       </div>
       <audio ref={audioRef} loop>
