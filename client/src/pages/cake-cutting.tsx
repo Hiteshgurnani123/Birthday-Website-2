@@ -59,14 +59,14 @@ export default function CakeCuttingPage() {
           onCakeAnimationComplete={() => setAnimationComplete(true)}
         />
         
-        {/* Optional navigation button (shown after animation completes) */}
+        {/* Navigation button to farewell page (shown after animation completes) */}
         {animationComplete && (
           <a 
-            href="/" 
+            href="/farewell" 
             className="mt-16 bg-[var(--pastel-blue)] bg-opacity-60 hover:bg-opacity-80 text-white font-dancing text-xl px-6 py-2 rounded-full shadow-lg transition-all duration-300 hover:scale-105 animate-fadeIn"
             style={{ animationDelay: "1s" }}
           >
-            Back to Beginning
+            Continue to Final Message
           </a>
         )}
       </div>

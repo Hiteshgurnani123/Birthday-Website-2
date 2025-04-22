@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Poppins:wght@300;400;500&family=Quicksand:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -169,6 +169,32 @@
 
 .font-quicksand {
   font-family: 'Quicksand', sans-serif;
+}
+
+.font-great-vibes {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Falling petals animation */
+@keyframes falling {
+  0% {
+    transform: translate(0, -10%) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(var(--random-x), 100vh) rotate(var(--random-rotate));
+    opacity: 0;
+  }
 }
 
 /* Hide scrollbar but keep functionality */

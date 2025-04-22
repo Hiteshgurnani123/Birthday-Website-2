@@ -5,6 +5,7 @@ import Modal from "./components/Modal";
 import AudioPlayer from "./components/AudioPlayer";
 import SparkleEffect from "./components/SparkleEffect";
 import CakeCuttingPage from "./pages/cake-cutting";
+import FarewellPage from "./pages/farewell";
 import NotFound from "./pages/not-found";
 
 // Define the gift options
@@ -155,6 +156,7 @@ function App() {
     <Switch>
       <Route path="/" component={HomePage} />
       <Route path="/cake-cutting" component={CakeCuttingPage} />
+      <Route path="/farewell" component={FarewellPage} />
       <Route component={NotFound} />
     </Switch>
   );
