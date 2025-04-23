@@ -71,9 +71,9 @@ function HomePage() {
       setUserInteracted(true);
       document.removeEventListener("click", handleFirstInteraction);
     };
-    
+
     document.addEventListener("click", handleFirstInteraction);
-    
+
     return () => {
       document.removeEventListener("click", handleFirstInteraction);
     };
@@ -86,46 +86,36 @@ function HomePage() {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    
-    // After a short delay, navigate to the cake cutting page
     setTimeout(() => {
-      navigate("/cake-cutting");
+      navigate("/gift/cake-cutting"); // updated route
     }, 1000);
   };
 
   return (
     <>
-      {/* Background Image */}
+      {/* Background */}
       <div 
         className="fixed inset-0 bg-cover bg-center" 
         style={{ 
           backgroundImage: `url('/bg-promises.jpg')`,
           filter: "brightness(0.9)"
         }}
-      ></div>
-      
-      {/* Overlay to darken background slightly */}
-      <div className="fixed inset-0 bg-black bg-opacity-20"></div>
-      
-      {/* Audio Player */}
+      />
+      <div className="fixed inset-0 bg-black bg-opacity-20" />
+
       <AudioPlayer userInteracted={userInteracted} />
-      
-      {/* Sparkle Effect */}
       <SparkleEffect />
-      
-      {/* Main Content */}
+
       <div className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16 font-quicksand text-ghibli-dark">
-        {/* Header */}
         <header className="text-center mb-12 mt-4 opacity-0 animate-fadeIn" style={{ animationDelay: "0.5s" }}>
-          <h1 className="text-5xl md:text-6xl font-dancing font-bold text-white drop-shadow-lg transform transition duration-500">
+          <h1 className="text-5xl md:text-6xl font-dancing font-bold text-white drop-shadow-lg">
             Choose a Special Gift or a Sweet Promise
           </h1>
           <p className="text-xl md:text-2xl font-dancing mt-4 text-white opacity-0 animate-slideUp" style={{ animationDelay: "1.2s" }}>
             A little something just for you, Tamnna.
           </p>
         </header>
-        
-        {/* Gift Grid */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-6xl px-4">
           {giftOptions.map((gift) => (
             <GiftCard
@@ -141,12 +131,8 @@ function HomePage() {
           ))}
         </div>
       </div>
-      
-      {/* Modal */}
-      <Modal 
-        isOpen={showModal}
-        onClose={handleCloseModal}
-      />
+
+      <Modal isOpen={showModal} onClose={handleCloseModal} />
     </>
   );
 }
@@ -154,9 +140,9 @@ function HomePage() {
 function App() {
   return (
     <Switch>
-      <Route path="/" component={HomePage} />
-      <Route path="/cake-cutting" component={CakeCuttingPage} />
-      <Route path="/farewell" component={FarewellPage} />
+      <Route path="/gift" component={HomePage} />
+      <Route path="/gift/cake-cutting" component={CakeCuttingPage} />
+      <Route path="/gift/farewell" component={FarewellPage} />
       <Route component={NotFound} />
     </Switch>
   );
