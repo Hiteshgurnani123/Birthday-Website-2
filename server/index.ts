@@ -46,9 +46,9 @@ app.use((req, res, next) => {
   }
 
   // Start server
-  const port = 5000;
-  server.listen(port, "127.0.0.1", () => {
-    log(`Serving on port ${port}`);
+ const port = 5000;
+  server.listen(port, '127.0.0.1', () => {
+    log(`serving on port ${port}`);
   });
 
   // Global error handlers
