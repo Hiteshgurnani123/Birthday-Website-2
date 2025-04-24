@@ -44,29 +44,27 @@ app.use((req, res, next) => {
   } else {
     serveStatic(app);
   }
+})();
 
-  // Start server
- const PORT = process.env.PORT || 5000;
+// Global error handlers for uncaught exceptions and unhandled rejections
+process.on("uncaughtException", (err) => {
+  log(`Uncaught Exception: ${err.message}`, "error");
+  process.exit(1);
+});
 
+process.on("unhandledRejection", (reason) => {
+  log(`Unhandled Rejection: ${reason}`, "error");
+  process.exit(1);
+});
+
+// Start server after async setup is done
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`[express] serving on port ${PORT}`);
 });
-
-  // Global error handlers
-  process.on("uncaughtException", (err) => {
-    log(`Uncaught Exception: ${err.message}`, "error");
-    process.exit(1);
-  });
-
-  process.on("unhandledRejection", (reason) => {
-    log(`Unhandled Rejection: ${reason}`, "error");
-    process.exit(1);
-  });
-})();
 
 // Express error handler (for routes or middleware errors)
 app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
   log(`Unhandled error: ${err.message}`, "express");
   res.status(500).json({ message: "Internal Server Error" });
 });
-
