@@ -46,10 +46,11 @@ app.use((req, res, next) => {
   }
 
   // Start server
- const port = 5000;
-  server.listen(port, '127.0.0.1', () => {
-    log(`serving on port ${port}`);
-  });
+ const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`[express] serving on port ${PORT}`);
+});
 
   // Global error handlers
   process.on("uncaughtException", (err) => {
